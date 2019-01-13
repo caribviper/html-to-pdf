@@ -1,7 +1,7 @@
 const gulp = require('gulp');
 const ts = require('gulp-typescript');
 const JSON_FILES = ['src/*.json', 'src/**/*.json'];
-const uglify = require('gulp-uglify');
+const uglify = require('gulp-uglify-es').default;
 const pump = require('pump');
 const rename = require('gulp-rename');
 const merge = require('merge2');
