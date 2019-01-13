@@ -13,7 +13,7 @@ npm install caribviper/html-to-pdf
   return buffer;
 });
 ```
-## Creat a PDF from styles
+## Creat a complex PDF with styles
 ```javascript
 (async () => {
   const content = '...'; //any html content
