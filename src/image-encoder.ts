@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 
 /**
- * Manages the image encodingof any image to base 64 data. 
+ * Manages the image encodingof any image to base 64 data.
  * This ensure images are saved with html to create pdf.
  */
 export class ImageEncoder {

@@ -2,13 +2,13 @@
  * Allows for the style of pdf documents using, style sheets, style tags or file paths
  */
 export class PdfDocumentStyle {
-    /**Url with css stylesheet */
+    /** Url with css stylesheet */
     public url: string;
 
-    /**style tag content` */
+    /** style tag content` */
     public content: string;
 
-    /**File path to styles */
+    /** File path to styles */
     public path: string;
 
     /**
