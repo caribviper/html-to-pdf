@@ -55,7 +55,6 @@ export class PdfDocumentTemplate {
             }
 
         } catch (error) {
-            console.log(error);
             return false;
         }
         finally {
@@ -78,10 +77,8 @@ export class PdfDocumentTemplate {
             this.content = settings.content;
             this.pageFormat = settings.pageFormat;
             this.documentStyles = settings.styles;
-            console.log(this.pageFormat);
             return await this.createPdf();
         } catch (error) {
-            console.log(error);
             buffer = false;
         }
         return buffer;
@@ -139,7 +136,7 @@ export class PdfDocumentTemplate {
 
             pdfSettings = new PdfDocumentSettings(documentStyles, pageFormat, html);
         } catch (error) {
-            console.log(error);
+            return undefined;
         }
         return pdfSettings;
     }
@@ -169,7 +166,8 @@ export class PdfDocumentTemplate {
     private async renderPage(browser: puppeteer.Browser, coverOption: PDF_COVER_OPTIONS): Promise<Buffer> {
         const page = await browser.newPage();
         // Removed to allow for long loading images
-        await page.goto(`data:text/html,${this.content}`, { waitUntil: 'networkidle0' });
+        // await page.goto(`data:text/html,${this.content}`, { waitUntil: 'networkidle0' });
+        await page.setContent(this.content, { waitUntil: 'networkidle0' });
 
         // set styles
         if (!!this.documentStyles && this.documentStyles.length > 0) {
@@ -211,7 +209,6 @@ export class PdfDocumentTemplate {
             buffer = outStream.toBuffer();
             outStream.end();
         } catch (error) {
-            console.log(error);
             buffer = undefined;
             outStream.end();
         }
