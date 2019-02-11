@@ -1,7 +1,8 @@
 /// <reference types="node" />
 import { PdfDocumentStyle } from './pdf-document-style';
 import { PdfPageFormat } from './pdf-page-format';
-export declare class PdfDocumentTemplate {
+import { RenderItem } from './render-item';
+export declare class PdfDocumentTemplate extends RenderItem {
     content: string;
     pageFormat: PdfPageFormat;
     documentStyles: PdfDocumentStyle[];
@@ -11,6 +12,5 @@ export declare class PdfDocumentTemplate {
     private parseHtml;
     private getSetting;
     private renderPage;
-    private getPageCounter;
     private merge;
 }

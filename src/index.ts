@@ -5,3 +5,5 @@ export * from './pdf-document-style';
 export * from './pdf-document-template';
 export * from './pdf-header-footer';
 export * from './pdf-page-format';
+export * from './render-item';
+export * from './digital-stamp';
