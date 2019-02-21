@@ -72,8 +72,8 @@ export class PdfDocumentTemplate extends RenderItem {
    * @param template html template containing the settings and the preformatted html content
    */
   public async createPdfFromTemplate(template: string): Promise<Buffer | boolean> {
-    let buffer: Buffer | boolean = undefined;
-    try {
+    // let buffer: Buffer | boolean = undefined;
+    // try {
       const settings = this.parseHtml(template);
 
       // render pdf
@@ -81,10 +81,10 @@ export class PdfDocumentTemplate extends RenderItem {
       this.pageFormat = settings.pageFormat;
       this.documentStyles = settings.styles;
       return await this.createPdf();
-    } catch (error) {
-      buffer = false;
-    }
-    return buffer;
+    // } catch (error) {
+    //   buffer = false;
+    // }
+    // return buffer;
   }
 
   private parseHtml(template: string): PdfDocumentSettings {
