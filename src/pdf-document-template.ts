@@ -32,7 +32,7 @@ export class PdfDocumentTemplate extends RenderItem {
     let browser: puppeteer.Browser = undefined;
     if (!this.pageFormat)
       return false;
-    try {
+    // try {
       browser = await puppeteer.launch();
       let coverPageBuffer: Buffer = undefined;
       let secondPageBuffer: Buffer = undefined;
@@ -56,14 +56,14 @@ export class PdfDocumentTemplate extends RenderItem {
         allPagesBuffer = await this.merge(coverPageBuffer, secondPageBuffer);
       }
 
-    } catch (error) {
-      console.log('PDF Document Template: ' + error);
-      return false;
-    }
-    finally {
+    // } catch (error) {
+    //   console.log('PDF Document Template: ' + error);
+    //   return false;
+    // }
+    // finally {
       if (!!browser)
         await browser.close();
-    }
+    // }
     return allPagesBuffer;
   }
 
