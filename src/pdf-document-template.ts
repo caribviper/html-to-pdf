@@ -57,6 +57,8 @@ export class PdfDocumentTemplate extends RenderItem {
       }
 
     } catch (error) {
+      console.log('PDF Document Template: ' + error);
+      console.log('PDF Document Template: ' + error.message);
       return false;
     }
     finally {
