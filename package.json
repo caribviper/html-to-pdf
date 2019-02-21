@@ -1,6 +1,6 @@
 {
   "name": "html-to-pdf",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Converts html to pdf using puppeteer",
   "main": "lib/index.js",
   "scripts": {
