@@ -33,15 +33,18 @@ export class PdfDocumentTemplate extends RenderItem {
     if (!this.pageFormat)
       return false;
     // try {
+      console.log('Starting puppeteer');
       browser = await puppeteer.launch();
       let coverPageBuffer: Buffer = undefined;
       let secondPageBuffer: Buffer = undefined;
 
-      // // set cover options
+      // // set cover options      
+      console.log('rendering cover');
       const coverOption = this.pageFormat.hasCoverPage ? PDF_COVER_OPTIONS_VALUES.COVER_WITH_ALL : PDF_COVER_OPTIONS_VALUES.NO_COVER;
       allPagesBuffer = await this.renderPage(browser, coverOption);
 
       // get total pages
+      console.log('get page count');
       const totalPages = await this.getPageCounter(allPagesBuffer);
 
       // check for cover and display header and footer and total pages are greater than 1
