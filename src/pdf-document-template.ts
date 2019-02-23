@@ -34,11 +34,11 @@ export class PdfDocumentTemplate extends RenderItem {
       return false;
     // try {
       console.log('Starting puppeteer');
-      browser = await puppeteer.launch();
+      browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
       let coverPageBuffer: Buffer = undefined;
       let secondPageBuffer: Buffer = undefined;
 
-      // // set cover options      
+      // // set cover options
       console.log('rendering cover');
       const coverOption = this.pageFormat.hasCoverPage ? PDF_COVER_OPTIONS_VALUES.COVER_WITH_ALL : PDF_COVER_OPTIONS_VALUES.NO_COVER;
       allPagesBuffer = await this.renderPage(browser, coverOption);
