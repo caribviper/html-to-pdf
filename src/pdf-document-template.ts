@@ -34,7 +34,7 @@ export class PdfDocumentTemplate extends RenderItem {
       return false;
     // try {
       console.log('Starting puppeteer');
-      browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
+      browser = await puppeteer.launch({dumpio: true, args: ['--no-sandbox', '--disable-setuid-sandbox']});
       let coverPageBuffer: Buffer = undefined;
       let secondPageBuffer: Buffer = undefined;
 
@@ -170,6 +170,7 @@ export class PdfDocumentTemplate extends RenderItem {
    * @param coverOption Cover options applied to the page
    */
   private async renderPage(browser: puppeteer.Browser, coverOption: PDF_COVER_OPTIONS): Promise<Buffer> {
+    console.log('getting new page');
     const page = await browser.newPage();
     // Removed to allow for long loading images
     // await page.goto(`data:text/html,${this.content}`, { waitUntil: 'networkidle0' });
