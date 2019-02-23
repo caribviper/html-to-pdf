@@ -173,7 +173,9 @@ export class PdfDocumentTemplate extends RenderItem {
     const page = await browser.newPage();
     // Removed to allow for long loading images
     // await page.goto(`data:text/html,${this.content}`, { waitUntil: 'networkidle0' });
+    console.log('setting content' + this.content.length);
     await page.setContent(this.content, { waitUntil: 'networkidle0' });
+    console.log('content set');
 
     // set styles
     if (!!this.documentStyles && this.documentStyles.length > 0) {
@@ -185,6 +187,8 @@ export class PdfDocumentTemplate extends RenderItem {
 
     // do scroll
     await page.evaluate(() => { window.scrollBy(0, window.innerHeight); });
+
+    console.log('creating pdf');
 
     const pageOptions = this.pageFormat.getOptions(coverOption);
     return await page.pdf(pageOptions);
