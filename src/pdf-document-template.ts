@@ -33,39 +33,40 @@ export class PdfDocumentTemplate extends RenderItem {
     if (!this.pageFormat)
       return false;
     // try {
-      console.log('Starting puppeteer');
-      browser = await puppeteer.launch({dumpio: true, args: ['--no-sandbox', '--disable-setuid-sandbox']});
-      let coverPageBuffer: Buffer = undefined;
-      let secondPageBuffer: Buffer = undefined;
+    console.log('Starting puppeteer');
+    // browser = await puppeteer.launch({dumpio: true, args: ['--no-sandbox', '--disable-setuid-sandbox']});
+    browser = await puppeteer.launch({ dumpio: true });
+    let coverPageBuffer: Buffer = undefined;
+    let secondPageBuffer: Buffer = undefined;
 
-      // // set cover options
-      console.log('rendering cover');
-      const coverOption = this.pageFormat.hasCoverPage ? PDF_COVER_OPTIONS_VALUES.COVER_WITH_ALL : PDF_COVER_OPTIONS_VALUES.NO_COVER;
-      allPagesBuffer = await this.renderPage(browser, coverOption);
+    // // set cover options
+    console.log('rendering cover');
+    const coverOption = this.pageFormat.hasCoverPage ? PDF_COVER_OPTIONS_VALUES.COVER_WITH_ALL : PDF_COVER_OPTIONS_VALUES.NO_COVER;
+    allPagesBuffer = await this.renderPage(browser, coverOption);
 
-      // get total pages
-      console.log('get page count');
-      const totalPages = await this.getPageCounter(allPagesBuffer);
+    // get total pages
+    console.log('get page count');
+    const totalPages = await this.getPageCounter(allPagesBuffer);
 
-      // check for cover and display header and footer and total pages are greater than 1
-      if (!!this.pageFormat.displayHeaderFooter && this.pageFormat.hasCoverPage && totalPages > 1) {
-        // do cover page
-        coverPageBuffer = await this.renderPage(browser, PDF_COVER_OPTIONS_VALUES.COVER);
+    // check for cover and display header and footer and total pages are greater than 1
+    if (!!this.pageFormat.displayHeaderFooter && this.pageFormat.hasCoverPage && totalPages > 1) {
+      // do cover page
+      coverPageBuffer = await this.renderPage(browser, PDF_COVER_OPTIONS_VALUES.COVER);
 
-        // do rest of pages
-        secondPageBuffer = await this.renderPage(browser, PDF_COVER_OPTIONS_VALUES.SECOND_NO_COVER);
+      // do rest of pages
+      secondPageBuffer = await this.renderPage(browser, PDF_COVER_OPTIONS_VALUES.SECOND_NO_COVER);
 
-        // merge pages
-        allPagesBuffer = await this.merge(coverPageBuffer, secondPageBuffer);
-      }
+      // merge pages
+      allPagesBuffer = await this.merge(coverPageBuffer, secondPageBuffer);
+    }
 
     // } catch (error) {
     //   console.log('PDF Document Template: ' + error);
     //   return false;
     // }
     // finally {
-      if (!!browser)
-        await browser.close();
+    if (!!browser)
+      await browser.close();
     // }
     return allPagesBuffer;
   }
@@ -77,13 +78,13 @@ export class PdfDocumentTemplate extends RenderItem {
   public async createPdfFromTemplate(template: string): Promise<Buffer | boolean> {
     // let buffer: Buffer | boolean = undefined;
     // try {
-      const settings = this.parseHtml(template);
+    const settings = this.parseHtml(template);
 
-      // render pdf
-      this.content = settings.content;
-      this.pageFormat = settings.pageFormat;
-      this.documentStyles = settings.styles;
-      return await this.createPdf();
+    // render pdf
+    this.content = settings.content;
+    this.pageFormat = settings.pageFormat;
+    this.documentStyles = settings.styles;
+    return await this.createPdf();
     // } catch (error) {
     //   buffer = false;
     // }
