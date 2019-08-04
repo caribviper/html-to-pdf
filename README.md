@@ -45,10 +45,9 @@ npm install caribviper/html-to-pdf
                   color: #696969;`;
   
   //set up header and footer templates with the above styles
-  pageFormat.headerTemplate = new PdfBaseHeaderFooterTemplate(styleHeader, '<p>Assessment Report for Reference Number: <b>0711/03/2010C</b></p>', PdfBaseHeaderFooterTemplate.EMPTY_TAG);
+  pageFormat.headerTemplate = new PdfBaseHeaderFooterTemplate(styleHeader, '<p>This is a header: <b>Bold Stuff</b></p>', PdfBaseHeaderFooterTemplate.EMPTY_TAG);
   pageFormat.footerTemplate = new PdfBaseHeaderFooterTemplate(styleFooter, `<b>
-  Our mission: To ensure that all members of the public are accorded an efficient and timely planning service in
-  order to provide the best physical environment possible for the island.
+  This is a footer
   </b>`, '');
 
   //page size
